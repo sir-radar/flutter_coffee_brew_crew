@@ -1,5 +1,6 @@
 import 'package:brew_crew/services/auth.dart';
 import 'package:brew_crew/shared/constants.dart';
+import 'package:brew_crew/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //text filed state
   String email = '';
@@ -24,7 +26,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
        backgroundColor: Colors.brown[100],
        appBar: AppBar(
          backgroundColor: Colors.brown[400],
@@ -72,9 +74,13 @@ class _SignInState extends State<SignIn> {
                  ),
                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
+                      setState(() => loading = true);
                       dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                       if (result == null) {
-                        setState(() => error = 'Could not sign in with credencials');
+                        setState((){ 
+                          error = 'Could not sign in with credencials';
+                          loading = false;
+                        });
                       }
                     }
                  },
