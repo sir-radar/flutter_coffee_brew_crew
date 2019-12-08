@@ -17,6 +17,7 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String error = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +51,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
-                  validator: (val) =>
-                      val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                  validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                   obscureText: true,
                   onChanged: (val) {
                     setState(() => password = val);
