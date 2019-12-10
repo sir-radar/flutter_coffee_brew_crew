@@ -61,7 +61,9 @@ class _SettingsFormState extends State<SettingsForm> {
              style: TextStyle(color: Colors.white)
            ),
            onPressed: () async {
-             
+             print(_currentName);
+             print(_currentStrength);
+             print(_currentSugars);
            },
          )
        ],),
